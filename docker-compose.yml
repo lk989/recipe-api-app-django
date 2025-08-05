@@ -16,3 +16,22 @@ services:
     # Command to run the Django development server
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db # Set the database host to the service name 'db'
+      - DB_NAME=recipe_dev_db # Set the database name
+      - DB_USER=dev_user # Set the database user
+      - DB_PASS=dev_password # Set the database password
+    depends_on:
+      - db # Ensure the app service starts after the db service
+  
+  db:
+    image: postgres:13-alpine # Use the official Postgres image
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data # Persist database data
+    environment:
+      - POSTGRES_DB=recipe_dev_db # Set the database name
+      - POSTGRES_USER=dev_user # Set the database user
+      - POSTGRES_PASSWORD=dev_password # Set the database password
+
+volumes:
+  dev-db-data: 
