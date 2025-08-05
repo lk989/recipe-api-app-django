@@ -1,0 +1,16 @@
+# The docker compose version
+version: "3.9"
+
+# Define the services that will be run in the Docker container
+services:
+  # Define the Django application service
+  app:
+    build:
+      context: . # Build context is the current directory
+    ports:
+      - "8000:8000" # Map port 8000 on the host to port 8000 in the container
+    volumes:
+      - ./app:/app # Mount the app directory to the container so any changes are reflected
+    # Command to run the Django development server
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
