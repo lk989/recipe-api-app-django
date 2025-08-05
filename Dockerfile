@@ -30,6 +30,10 @@ ARG DEV=false
 RUN python -m venv /p && \
     # Install the required packages in the virtual environment
     /p/bin/pip install --upgrade pip && \
+    # Install the required packages for postgresql adapter (psycopg2)
+    apk add --update --no-cache postgresql-client && \
+    apk add --update --no-cache --virtual .tmp-build-deps \
+        build-base postgresql-dev musl-dev && \
     /p/bin/pip install -r /tmp/requirements.txt && \
     # If the DEV argument is true, install the development requirements
     if [ $DEV = "true" ]; then \
@@ -37,6 +41,8 @@ RUN python -m venv /p && \
     fi && \
     # remove the temp file to keep image light
     rm -rf /tmp && \
+    # clean up the apk cache to reduce image size
+    apk del .tmp-build-deps && \
     # create user || it is a good practice to run the app as a non-root user
     adduser \
         # create a user with no password
