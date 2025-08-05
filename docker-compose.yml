@@ -7,6 +7,8 @@ services:
   app:
     build:
       context: . # Build context is the current directory
+      args:
+        - DEV=true # Pass an argument to the Dockerfile to indicate development mode
     ports:
       - "8000:8000" # Map port 8000 on the host to port 8000 in the container
     volumes:

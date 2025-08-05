@@ -13,6 +13,8 @@ ENV PYTHONUNBUFFERED=1
 
 # Install the required packages from the requirements.txt file
 COPY ./requirements.txt /tmp/requirements.txt
+# Install the required packages from the requirements.dev.txt file
+COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 # Copy the application code into the container
 COPY ./app /app
 # Set the working directory to /app
@@ -21,6 +23,7 @@ WORKDIR /app
 EXPOSE 8000
 
 
+ARG DEV=false
 # Running all the commands in a single RUN statement to reduce the number of layers in the image
 
 # Create a virtual environment in the /p directory
@@ -28,6 +31,10 @@ RUN python -m venv /p && \
     # Install the required packages in the virtual environment
     /p/bin/pip install --upgrade pip && \
     /p/bin/pip install -r /tmp/requirements.txt && \
+    # If the DEV argument is true, install the development requirements
+    if [ $DEV = "true" ]; then \
+        /p/bin/pip install -r /tmp/requirements.dev.txt; \
+    fi && \
     # remove the temp file to keep image light
     rm -rf /tmp && \
     # create user || it is a good practice to run the app as a non-root user
