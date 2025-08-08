@@ -4,3 +4,5 @@ exclude =
     __pycache__,
     manage.py
     settings.py
+ignore = 
+    F401,  # module imported but unused

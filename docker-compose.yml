@@ -1,5 +1,5 @@
 # The docker compose version
-version: "3.9"
+# version: "3.9"
 
 # Define the services that will be run in the Docker container
 services:
