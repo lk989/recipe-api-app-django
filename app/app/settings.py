@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core',  # Custom app for core functionality
     'rest_framework',  # Django REST Framework
     'drf_spectacular',  # For API schema generation
+    'user',
 ]
 
 MIDDLEWARE = [
