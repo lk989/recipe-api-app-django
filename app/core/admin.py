@@ -25,6 +25,21 @@ class UserAdmin(BaseUserAdmin):
 
     readonly_fields = ['last_login']
 
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': (
+                'email',
+                'password1',
+                'password2',
+                'name',
+                'is_active',
+                'is_staff',
+                'is_superuser'
+            )
+        }),
+    )
+
 
 # Second argument is not required.
 # It is used to specify the model admin class.
