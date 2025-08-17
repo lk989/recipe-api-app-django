@@ -44,3 +44,4 @@ class UserAdmin(BaseUserAdmin):
 # Second argument is not required.
 # It is used to specify the model admin class.
 admin.site.register(models.User, UserAdmin)
+admin.site.register(models.Recipe)
