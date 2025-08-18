@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',  # Django REST Framework for authentication tokens
     'drf_spectacular',  # For API schema generation
     'user',
+    'recipe',
 ]
 
 MIDDLEWARE = [
